@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GadgetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,14 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
 });
+Route::group([
+    'middleware' => 'api',
+], function ($router) {
+    Route::post('/gadget-store', [GadgetController::class, 'store'])->name('gadget_store');
+    Route::get('/gadget-list', [GadgetController::class, 'index'])->name('gadget_list');
+    Route::get('/gadget-single/{id}', [GadgetController::class, 'show'])->name('gadget_single');
+});
+

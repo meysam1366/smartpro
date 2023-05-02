@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Processor;
+use App\Gadget;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class ProcessorController extends Controller
+class GadgetController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
     public function index()
     {
-        //
+        $gadgets = Gadget::all();
+        return response()->json([
+            'message' => 'User Gadgets Lists',
+            'gadgets' => $gadgets
+        ], 201);
+
     }
 
     /**
@@ -35,7 +45,25 @@ class ProcessorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request);
+        $validator = Validator::make($request->all(), [
+            'Fa_Name' => 'required',
+            'En_Name' => 'required',
+            'Last_Value' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        //dd((array) $request);
+        $gadget = Gadget::create([
+            'Fa_Name' => $request->input('Fa_Name'),
+            'En_Name' => $request->input('En_Name'),
+            'Last_Value' => $request->input('Last_Value'),
+        ]);;
+        return response()->json([
+            'message' => 'User successfully registered',
+            'gadget' => $gadget
+        ], 201);
     }
 
     /**
@@ -44,9 +72,13 @@ class ProcessorController extends Controller
      * @param  \App\Processor  $processor
      * @return \Illuminate\Http\Response
      */
-    public function show(Processor $processor)
+    public function show($id)
     {
-        //
+        $gadget = Gadget::find($id);
+        return response()->json([
+            'message' => 'User Gadget',
+            'gadget' => $gadget
+        ], 201);
     }
 
     /**
