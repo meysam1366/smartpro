@@ -87,9 +87,9 @@ class GadgetController extends Controller
      * @param  \App\Processor  $processor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Processor $processor)
+    public function edit(Gadget $gadget,$id)
     {
-        //
+
     }
 
     /**
@@ -99,9 +99,18 @@ class GadgetController extends Controller
      * @param  \App\Processor  $processor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Processor $processor)
+    public function update(Request $request, Gadget $gadget)
     {
-        //
+        $gadget_single = Gadget::find($request->header('id'));
+
+        $validatedData = $request->validate([
+            'Last_Value' => 'required',
+        ]);
+        $gadget_single->update($validatedData);
+        return response()->json([
+            'message' => 'User Gadget',
+            'gadget' => $gadget_single
+        ], 201);
     }
 
     /**

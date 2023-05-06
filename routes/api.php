@@ -33,5 +33,6 @@ Route::group([
     Route::post('/gadget-store', [GadgetController::class, 'store'])->name('gadget_store');
     Route::get('/gadget-list', [GadgetController::class, 'index'])->name('gadget_list');
     Route::get('/gadget-single/{id}', [GadgetController::class, 'show'])->name('gadget_single');
+    Route::post('/gadget-single-update',  [GadgetController::class, 'update'])->name('gadget_single_update');
 });
 
