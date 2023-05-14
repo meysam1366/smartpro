@@ -20,6 +20,7 @@ class CreateGadgetsTable extends Migration
             $table->integer('Last_Value')->default(0)->nullable();
             $table->string('status')->default('active')->nullable();
             $table->string('Type')->nullable();
+            $table->unsignedBigInteger('processor_id');
             $table->softDeletes();
             $table->timestamps();
         });

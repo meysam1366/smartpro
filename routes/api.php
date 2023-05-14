@@ -34,5 +34,16 @@ Route::group([
     Route::get('/gadget-list', [GadgetController::class, 'index'])->name('gadget_list');
     Route::get('/gadget-single/{id}', [GadgetController::class, 'show'])->name('gadget_single');
     Route::post('/gadget-single-update',  [GadgetController::class, 'update'])->name('gadget_single_update');
+
+
+    Route::get('/processor-single/{id}', [ProcessorController::class, 'show'])->name('processor_single');
+    Route::get('/processor-list', [ProcessorController::class, 'index'])->name('processor_list');
+
+
+    Route::get('/gadget-get-value', [GadgetController::class, 'gadgetGetValue'])->name('gadget_Get_Value');
+    Route::post('/gadget-set-value', [GadgetController::class, 'gadgetSetValue'])->name('gadget_Set_Value');
 });
 
+//Route::prefix('news')->name('news.')->group(function (){
+   // Route::get('/details/{news}', 'NewsController@details')->name('details');
+//});

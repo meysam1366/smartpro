@@ -14,4 +14,8 @@ class Gadget extends Model
     protected $fillable = [
         'Fa_Name', 'En_Name', 'Last_Value','status','Type'
     ];
+    public function processor()
+    {
+        return $this->belongsTo(Processor::class);
+    }
 }
