@@ -40,8 +40,8 @@ Route::group([
     Route::get('/processor-list', [ProcessorController::class, 'index'])->name('processor_list');
 
 
-    Route::get('/gadget-get-value', [GadgetController::class, 'gadgetGetValue'])->name('gadget_Get_Value');
-    Route::post('/gadget-set-value', [GadgetController::class, 'gadgetSetValue'])->name('gadget_Set_Value');
+    Route::get('/gadget-get-value', [ProcessorController::class, 'gadgetGetValue'])->name('gadget_Get_Value');
+    Route::post('/gadget-set-value', [ProcessorController::class, 'gadgetSetValue'])->name('gadget_Set_Value');
 });
 
 //Route::prefix('news')->name('news.')->group(function (){
