@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GadgetController;
+use App\Http\Controllers\ProcessorController;
+use App\Http\Controllers\VersionsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +28,6 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
-
 });
 Route::group([
     'middleware' => 'api',
@@ -42,6 +44,9 @@ Route::group([
 
     Route::get('/gadget-get-value', [ProcessorController::class, 'gadgetGetValue'])->name('gadget_Get_Value');
     Route::post('/gadget-set-value', [ProcessorController::class, 'gadgetSetValue'])->name('gadget_Set_Value');
+
+    Route::get('/version-get-value', [VersionsController::class, 'versionGetValue'])->name('version_Get_Value');
+    Route::post('/version-set-value', [VersionsController::class, 'versionSetValue'])->name('version_Set_Value');
 });
 
 //Route::prefix('news')->name('news.')->group(function (){
