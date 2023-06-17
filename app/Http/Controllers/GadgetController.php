@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gadget;
+use App\Processor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +17,7 @@ class GadgetController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
     }
     public function index()
     {
@@ -57,11 +58,19 @@ class GadgetController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
         //dd((array) $request);
+
+
+        $processor = Processor::findOrFail($request->input('processor_id'));
+
+
+
         $gadget = Gadget::create([
             'Fa_Name' => $request->input('Fa_Name'),
             'En_Name' => $request->input('En_Name'),
             'Last_Value' => $request->input('Last_Value'),
-        ]);;
+
+        ]);
+        $processor->gadgets()->save($gadget);
         return response()->json([
             'message' => 'User successfully registered',
             'gadget' => $gadget
@@ -124,6 +133,4 @@ class GadgetController extends Controller
     {
         //
     }
-
-
 }

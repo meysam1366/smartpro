@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Processor;
+use App\Gadget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use \PhpMqtt\Client\MqttClient;
+use \PhpMqtt\Client\ConnectionSettings;
 
 class ProcessorController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         //$this->middleware('auth:api');
     }
 
@@ -20,7 +24,6 @@ class ProcessorController extends Controller
             'message' => 'Processors Lists',
             'processors' => $processors
         ], 201);
-
     }
     public function show($id)
     {
@@ -84,6 +87,57 @@ class ProcessorController extends Controller
             if ($gadget->update([
                 'last_value' => $request->input('last_value'),
             ])) {
+
+
+                $server   = 'f1a01028.ala.us-east-1.emqxsl.com';
+                $port     = 1883;
+                $clientId = rand(5, 15);
+                $username = 'fartak_user';
+                $password = 'Aa123456';
+                $clean_session = true;
+
+
+                $connectionSettings = (new ConnectionSettings)
+                    ->setUsername($username)
+                    ->setPassword($password)
+                    ->setKeepAliveInterval(60)
+                    ->setLastWillMessage('client disconnect')
+                    ->setLastWillQualityOfService(1);
+
+                $mqtt = new MqttClient($server, $port, $clientId);
+                dd($mqtt->connect($connectionSettings, $clean_session));
+                $mqtt->connect($connectionSettings, $clean_session);
+
+                $payload = array(
+                    'protocol' => 'tcp',
+                    'date' => date('Y-m-d H:i:s'),
+                    'url' => 'https://github.com/emqx/MQTT-Client-Examples'
+                );
+
+                // $mqtt->publish(
+                //     // topic
+                //     'fartak_pro',
+                //     // payload
+                //     'testpro',
+                //     // qos
+                //     0,
+                //     // retain
+                //     true
+                // );
+                dd($mqtt->publish(
+                    // topic
+                    'fartak_pro',
+                    // payload
+                    'testpro',
+                    // qos
+                    0,
+                    // retain
+                    true
+                ));
+
+
+                $mqtt->loop(true);
+                $mqtt->disconnect();
                 return response()->json([
                     'message' => 'Processor && Gadget  updated With Last Value',
                     'Gadget With Last Value' => $gadget
