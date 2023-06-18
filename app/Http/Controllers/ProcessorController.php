@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Processor;
 use App\Gadget;
+use PhpMqtt\Client\Facades\MQTT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use \PhpMqtt\Client\MqttClient;
-use \PhpMqtt\Client\ConnectionSettings;
+
+use PhpMqtt\Client\ConnectionSettings;
+use PhpMqtt\Client\Examples\Shared\SimpleLogger;
+use PhpMqtt\Client\Exceptions\MqttClientException;
+use PhpMqtt\Client\MqttClient;
+use Psr\Log\LogLevel;
+
+// use \PhpMqtt\Client\MqttClient;
+// use \PhpMqtt\Client\ConnectionSettings;
 
 class ProcessorController extends Controller
 {
@@ -89,55 +97,32 @@ class ProcessorController extends Controller
             ])) {
 
 
-                $server   = 'f1a01028.ala.us-east-1.emqxsl.com';
-                $port     = 1883;
-                $clientId = rand(5, 15);
-                $username = 'fartak_user';
-                $password = 'Aa123456';
-                $clean_session = true;
 
+                //$logger = new SimpleLogger(LogLevel::INFO);
 
-                $connectionSettings = (new ConnectionSettings)
-                    ->setUsername($username)
-                    ->setPassword($password)
-                    ->setKeepAliveInterval(60)
-                    ->setLastWillMessage('client disconnect')
-                    ->setLastWillQualityOfService(1);
+                try {
+                    // Create a new instance of an MQTT client and configure it to use the shared broker host and port.
+                    $client = new MqttClient(env('MQTT_HOST'), env('MQTT_PORT'), 'test-publisher', MqttClient::MQTT_3_1, null);
 
-                $mqtt = new MqttClient($server, $port, $clientId);
-                dd($mqtt->connect($connectionSettings, $clean_session));
-                $mqtt->connect($connectionSettings, $clean_session);
+                    // Create and configure the connection settings as required.
+                    $connectionSettings = (new ConnectionSettings)
+                        ->setUsername(env('MQTT_AUTH_USERNAME'))
+                        ->setPassword(env('MQTT_AUTH_PASSWORD'));
 
-                $payload = array(
-                    'protocol' => 'tcp',
-                    'date' => date('Y-m-d H:i:s'),
-                    'url' => 'https://github.com/emqx/MQTT-Client-Examples'
-                );
+                    // Connect to the broker with the configured connection settings and with a clean session.
+                    $client->connect($connectionSettings, true);
 
-                // $mqtt->publish(
-                //     // topic
-                //     'fartak_pro',
-                //     // payload
-                //     'testpro',
-                //     // qos
-                //     0,
-                //     // retain
-                //     true
-                // );
-                dd($mqtt->publish(
-                    // topic
-                    'fartak_pro',
-                    // payload
-                    'testpro',
-                    // qos
-                    0,
-                    // retain
-                    true
-                ));
+                    // Publish the message 'Hello world!' on the topic 'foo/bar/baz' using QoS 0.
+                    $client->publish('fartak_pro', 'Hello#!', MqttClient::QOS_EXACTLY_ONCE);
+                    $client->loop(true, true);
+                    // Gracefully terminate the connection to the broker.
+                    $client->disconnect();
+                } catch (MqttClientException $e) {
+                    // MqttClientException is the base exception of all exceptions in the library. Catching it will catch all MQTT related exceptions.
+                    dd($e);
+                    //$logger->error('Connecting with username and password or publishing with QoS 0 failed. An exception occurred.', ['exception' => $e]);
+                }
 
-
-                $mqtt->loop(true);
-                $mqtt->disconnect();
                 return response()->json([
                     'message' => 'Processor && Gadget  updated With Last Value',
                     'Gadget With Last Value' => $gadget
