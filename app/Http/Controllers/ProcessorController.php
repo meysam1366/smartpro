@@ -102,18 +102,21 @@ class ProcessorController extends Controller
 
                 try {
                     // Create a new instance of an MQTT client and configure it to use the shared broker host and port.
-                    $client = new MqttClient(env('MQTT_HOST'), env('MQTT_PORT'), 'test-publisher', MqttClient::MQTT_3_1, null);
+                    $client = new MqttClient(env('MQTT_HOST'), env('MQTT_PORT'), 'test-publisher');
 
                     // Create and configure the connection settings as required.
                     $connectionSettings = (new ConnectionSettings)
                         ->setUsername(env('MQTT_AUTH_USERNAME'))
-                        ->setPassword(env('MQTT_AUTH_PASSWORD'));
+                        ->setPassword(env('MQTT_AUTH_PASSWORD'))
+                        ->setConnectTimeout(3)
+                        ->setUseTls(true)
+                        ->setTlsSelfSignedAllowed(true);
 
                     // Connect to the broker with the configured connection settings and with a clean session.
                     $client->connect($connectionSettings, true);
 
                     // Publish the message 'Hello world!' on the topic 'foo/bar/baz' using QoS 0.
-                    $client->publish('fartak_pro', 'Hello#!', MqttClient::QOS_EXACTLY_ONCE);
+                    $client->publish('smartpro', 'Hello#!', 0);
                     $client->loop(true, true);
                     // Gracefully terminate the connection to the broker.
                     $client->disconnect();
