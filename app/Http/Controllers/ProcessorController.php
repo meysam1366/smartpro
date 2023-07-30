@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Processor;
-use App\Gadget;
+use App\Models\Processor;
+use App\Models\Gadget;
+use App\Models\ProcType;
 use PhpMqtt\Client\Facades\MQTT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Carbon\Carbon;
 use PhpMqtt\Client\ConnectionSettings;
 use PhpMqtt\Client\Examples\Shared\SimpleLogger;
 use PhpMqtt\Client\Exceptions\MqttClientException;
@@ -136,5 +137,95 @@ class ProcessorController extends Controller
             'message' => 'Processor && Gadget  Missmatched',
             'Gadget With Last Value' => null
         ], 401);
+    }
+
+    public function setProcType(Request $request)
+    {
+        $this->validate($request, [
+            'pTypeName' => 'required',
+            'tag' => 'required',
+        ]);
+
+        ProcType::create([
+            'pTypeName' => $request->pTypeName,
+            'tag' => $request->tag,
+        ]);
+
+        return response()->json([
+            'message' => 'ProcType successfully created',
+        ], 201);
+    }
+
+    public function saveNewProc(Request $request)
+    {
+        $this->validate($request, [
+            'procId' => 'required',
+            'procPassword' => 'required',
+            'pDavName' => 'required',
+            'procType' => 'required',
+        ]);
+
+        Processor::create([
+            'procId' => $request->procId,
+            'procPassword' => $request->procPassword,
+            'pDavName' => $request->pDavName,
+            'procType' => $request->procType,
+            'firstWorkDate' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        return response()->json([
+            'message' => 'Processor successfully created',
+        ], 201);
+    }
+
+    public function registeredProc(Request $request)
+    {
+        $this->validate($request, [
+            'procId' => 'required',
+            'procPassword' => 'required'
+        ]);
+
+        $status = Processor::where('procId', $request->procId)
+            ->where('procPassword', $request->procPassword)
+            ->first();
+
+        return response()->json([
+            'status' => is_null($status) ? false : true,
+            'processor' => $status
+        ], 200);
+    }
+
+    public function getGadgetLists(Request $request)
+    {
+        $this->validate($request, [
+            'procId' => 'required',
+        ]);
+
+        $gadgetLists = Gadget::where('procId', $request->procId)
+            ->get();
+
+        return response()->json([
+            'gadgetLists' => $gadgetLists,
+        ], 200);
+    }
+
+    public function changeName(Request $request)
+    {
+        $this->validate($request, [
+            'procId' => 'required',
+            'pCustomerName' => 'required',
+        ]);
+
+        $processor = Processor::where('procId', $request->procId)
+            ->first();
+
+        $processor->update([
+            'pCustomerName' => $request->pCustomerName
+        ]);
+
+        return response()->json([
+            'message' => 'pCustomerName successfully updated',
+            'processor' => $processor,
+        ], 200);
     }
 }

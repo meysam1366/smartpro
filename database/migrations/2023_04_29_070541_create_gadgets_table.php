@@ -15,12 +15,14 @@ class CreateGadgetsTable extends Migration
     {
         Schema::create('gadgets', function (Blueprint $table) {
             $table->id();
-            $table->string('Fa_Name', 100)->nullable();
-            $table->string('En_Name', 100)->nullable();
-            $table->integer('Last_Value')->default(0)->nullable();
+            $table->unsignedBigInteger('procId');
+            $table->foreign('procId')->references('procId')->on('processors');
+            $table->unsignedBigInteger('gadgetType');
+            $table->foreign('gadgetType')->references('id')->on('gadget_types');
+            $table->string('gDavName')->nullable();
+            $table->string('gCustomerName')->nullable();
+            $table->integer('lastValue')->default(0)->nullable();
             $table->string('status')->default('active')->nullable();
-            $table->string('Type')->nullable();
-            $table->unsignedBigInteger('processor_id');
             $table->softDeletes();
             $table->timestamps();
         });

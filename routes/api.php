@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GadgetController;
 use App\Http\Controllers\ProcessorController;
+use App\Http\Controllers\ProcFrimWareController;
 use App\Http\Controllers\VersionsController;
 
 
@@ -47,6 +48,18 @@ Route::group([
 
     Route::get('/version-get-value', [VersionsController::class, 'versionGetValue'])->name('version_Get_Value');
     Route::post('/version-set-value', [VersionsController::class, 'versionSetValue'])->name('version_Set_Value');
+
+    Route::post('/setProcType', [ProcessorController::class, 'setProcType']);
+    Route::post('/saveNewProc', [ProcessorController::class, 'saveNewProc']);
+    Route::post('/registeredProc', [ProcessorController::class, 'registeredProc']);
+    Route::post('/getGadgetLists', [ProcessorController::class, 'getGadgetLists']);
+    Route::post('/changeName', [ProcessorController::class, 'changeName']);
+    Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
+    Route::post('/setGadgetType', [GadgetController::class, 'setGadgetType']);
+    Route::post('/saveGadget', [GadgetController::class, 'saveGadget']);
+    Route::post('/setNewValue', [GadgetController::class, 'setNewValue']);
+    Route::post('/getGadgetValue', [GadgetController::class, 'getGadgetValue']);
+    Route::post('/changeName', [GadgetController::class, 'changeName']);
 });
 
 //Route::prefix('news')->name('news.')->group(function (){

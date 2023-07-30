@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,10 +12,15 @@ class Gadget extends Model
     //
 
     protected $fillable = [
-        'Fa_Name', 'En_Name', 'Last_Value', 'status', 'Type', 'processor_id'
+        'procId',
+        'gadgetType',
+        'gDavName',
+        'gCustomerName',
+        'lastValue',
+        'status'
     ];
     public function processor()
     {
-        return $this->belongsTo(Processor::class);
+        return $this->belongsTo(Processor::class, 'procId');
     }
 }

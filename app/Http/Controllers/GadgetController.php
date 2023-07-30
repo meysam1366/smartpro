@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Gadget;
-use App\Processor;
+use App\Models\Gadget;
+use App\Models\Processor;
+use App\Models\GadgetType;
+use App\Models\GadgetChangeValueHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use PhpMqtt\Client\ConnectionSettings;
+use PhpMqtt\Client\Exceptions\MqttClientException;
+use PhpMqtt\Client\MqttClient;
 
 class GadgetController extends Controller
 {
@@ -132,5 +138,123 @@ class GadgetController extends Controller
     public function destroy(Processor $processor)
     {
         //
+    }
+
+    public function setGadgetType(Request $request)
+    {
+        $this->validate($request, [
+            'gTypeName' => 'required',
+            'tag' => 'required',
+        ]);
+
+        GadgetType::create([
+            'gTypeName' => $request->gTypeName,
+            'tag' => $request->tag,
+        ]);
+
+        return response()->json([
+            'message' => 'GadgetType successfully created',
+        ], 201);
+    }
+
+    public function saveGadget(Request $request)
+    {
+        $this->validate($request, [
+            'procId' => 'required',
+            'gadgetType' => 'required',
+            'gDavName' => 'required',
+            'lastValue' => 'required',
+        ]);
+
+        Gadget::create([
+            'procId' => $request->procId,
+            'gadgetType' => $request->gadgetType,
+            'gDavName' => $request->gDavName,
+            'lastValue' => $request->lastValue,
+        ]);
+
+        return response()->json([
+            'message' => 'GadGet successfully created',
+        ], 201);
+    }
+
+    public function setNewValue(Request $request)
+    {
+        $this->validate($request, [
+            'gadgetId' => 'required',
+            'newValue' => 'required',
+        ]);
+
+        $gadgetChangeValueHistory = GadgetChangeValueHistory::create([
+            'gadget_id' => $request->gadgetId,
+            'value' => $request->newValue,
+            'timeOfChange' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        $procId = $gadgetChangeValueHistory->gadget->processor->procId;
+        $lastValue = $gadgetChangeValueHistory->gadget->lastValue;
+
+        try {
+            // Create a new instance of an MQTT client and configure it to use the shared broker host and port.
+            $client = new MqttClient(env('MQTT_HOST'), env('MQTT_PORT'), 'test-publisher');
+
+            // Create and configure the connection settings as required.
+            $connectionSettings = (new ConnectionSettings)
+                ->setUsername(env('MQTT_AUTH_USERNAME'))
+                ->setPassword(env('MQTT_AUTH_PASSWORD'))
+                ->setConnectTimeout(3)
+                ->setUseTls(true)
+                ->setTlsSelfSignedAllowed(true);
+
+            // Connect to the broker with the configured connection settings and with a clean session.
+            $client->connect($connectionSettings, true);
+
+            // Publish the message 'Hello world!' on the topic 'foo/bar/baz' using QoS 0.
+            $client->publish($procId, $lastValue, 0);
+            $client->loop(true, true);
+            // Gracefully terminate the connection to the broker.
+            $client->disconnect();
+        } catch (MqttClientException $e) {
+            // MqttClientException is the base exception of all exceptions in the library. Catching it will catch all MQTT related exceptions.
+            dd($e);
+            //$logger->error('Connecting with username and password or publishing with QoS 0 failed. An exception occurred.', ['exception' => $e]);
+        }
+
+        return response()->json([
+            'message' => 'gadgetChangeValueHistory successfully created',
+            'gadgetChangeValueHistory' => $gadgetChangeValueHistory
+        ], 201);
+    }
+
+    public function getGadgetValue(Request $request)
+    {
+        $this->validate($request, [
+            'gadgetId' => 'required',
+        ]);
+
+        $gadgetChangeValueHistory = GadgetChangeValueHistory::where('gadget_id', $request->gadgetId)->first();
+
+        return response()->json([
+            'gadgetValue' => $gadgetChangeValueHistory
+        ], 200);
+    }
+
+    public function changeName(Request $request)
+    {
+        $this->validate($request, [
+            'gadgetId' => 'required',
+            'gCustomerName' => 'required',
+        ]);
+
+        $gadget = Gadget::where('id', $request->gadgetId);
+
+        $gadget->update([
+            'gCustomerName' => $request->gCustomerName
+        ]);
+
+        return response()->json([
+            'message' => 'gadget successfully updated',
+            'gadget' => $gadget
+        ], 200);
     }
 }

@@ -14,8 +14,13 @@ class CreateProcessorsTable extends Migration
     public function up()
     {
         Schema::create('processors', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 100)->nullable();
+            $table->unsignedBigInteger('procId')->primary();
+            $table->unsignedBigInteger('procType');
+            $table->foreign('procType')->references('id')->on('proc_types');
+            $table->string('procPassword');
+            $table->string('pDavName');
+            $table->string('pCustomerName')->nullable();
+            $table->datetime('firstWorkDate');
             $table->softDeletes();
             $table->timestamps();
         });
