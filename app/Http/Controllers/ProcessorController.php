@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Processor;
 use App\Models\Gadget;
 use App\Models\ProcType;
+use App\Models\UserProcessor;
 use PhpMqtt\Client\Facades\MQTT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -226,6 +227,39 @@ class ProcessorController extends Controller
         return response()->json([
             'message' => 'pCustomerName successfully updated',
             'processor' => $processor,
+        ], 200);
+    }
+
+    public function setProcessorsToUser(Request $request)
+    {
+        $this->validate($request, [
+            'procId' => 'required',
+        ]);
+
+        $user_id = $request->user()->id;
+
+        $processors = UserProcessor::create([
+            'user_id' => $user_id,
+            'procId' => $request->procId
+        ]);
+
+        return response()->json([
+            'message' => 'processor assign to user successfully updated',
+            'processors' => $processors,
+        ], 200);
+    }
+
+    public function getProcessorsByToken(Request $request)
+    {
+        $user_id = $request->user()->id;
+
+        $processors = UserProcessor::where([
+            'user_id' => $user_id,
+        ])->get();
+
+        return response()->json([
+            'message' => 'processors user',
+            'processors' => $processors,
         ], 200);
     }
 }

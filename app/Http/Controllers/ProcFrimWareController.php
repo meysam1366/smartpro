@@ -42,17 +42,20 @@ class ProcFrimWareController extends Controller
         ]);
 
         $frimWare = ProcFrimWare::where('pType', $request->pType)
-            ->where('version', $request->version)
+            ->where('version', ">", $request->version)
+            ->latest()
             ->first();
 
-        if ($frimWare) {
-            $frimWare = null;
-        } else {
-            $frimWare = $frimWare->filePath;
+        if (is_null($frimWare)) {
+            return response()->json([
+                'message' => 'new version not exsist',
+                'filePath' => null
+            ], 404);
         }
 
         return response()->json([
-            'filePath' => $frimWare
+            'message' => 'new version exsist',
+            'filePath' => $frimWare->filePath
         ], 200);
     }
 }

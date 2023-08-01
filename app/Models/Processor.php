@@ -24,4 +24,9 @@ class Processor extends Model
     {
         return $this->hasMany(Gadget::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

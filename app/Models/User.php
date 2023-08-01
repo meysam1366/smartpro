@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -20,23 +21,6 @@ class User extends Authenticatable implements JWTSubject
         'name', 'family', 'mobile', 'otp'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -54,5 +38,20 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function scopeCheckMobile($query, $mobile)
+    {
+        return $query->whereMobile($mobile)->first();
+    }
+
+    public function scopeCheckMobileAndOtp($query, $mobile, $otp)
+    {
+        return $query->whereMobile($mobile)->where('otp', $otp)->first();
+    }
+
+    public function processors()
+    {
+        return $this->belongsToMany(Processor::class, 'procId');
     }
 }
