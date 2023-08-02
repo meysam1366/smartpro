@@ -20,7 +20,7 @@ use App\Http\Controllers\VersionsController;
 |
 */
 
-Route::middleware('api')
+Route::middleware(['api', 'cors'])
     ->prefix('v1/auth')
     ->group(function ($router) {
         route::post('registerOrLogin', [AuthController::class, 'registerOrLogin']);
