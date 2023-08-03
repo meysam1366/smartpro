@@ -15,4 +15,9 @@ class UserProcessor extends Model
     ];
 
     public $table = "users_processors";
+
+    public function processor()
+    {
+        return $this->belongsTo(Processor::class, 'procId');
+    }
 }

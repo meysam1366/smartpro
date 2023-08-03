@@ -255,7 +255,7 @@ class ProcessorController extends Controller
 
         $processors = UserProcessor::where([
             'user_id' => $user_id,
-        ])->get();
+        ])->with('processor')->get();
 
         return response()->json([
             'message' => 'processors user',
