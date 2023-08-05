@@ -12,6 +12,7 @@ class Gadget extends Model
     //
 
     protected $fillable = [
+        'gadgetId',
         'procId',
         'gadgetType',
         'gDavName',
@@ -19,6 +20,11 @@ class Gadget extends Model
         'lastValue',
         'status'
     ];
+
+    protected $primaryKey = 'gadgetId';
+
+    public $incrementing = false;
+
     public function processor()
     {
         return $this->belongsTo(Processor::class, 'procId');

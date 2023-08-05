@@ -234,19 +234,30 @@ class ProcessorController extends Controller
     {
         $this->validate($request, [
             'procId' => 'required',
+            'procPassword' => 'required',
         ]);
 
         $user_id = $request->user()->id;
 
-        $processors = UserProcessor::create([
-            'user_id' => $user_id,
-            'procId' => $request->procId
-        ]);
+        $processor = Processor::where('procId', $request->procId)
+            ->where('procPassword', $request->procPassword)->first();
 
-        return response()->json([
-            'message' => 'processor assign to user successfully updated',
-            'processors' => $processors,
-        ], 200);
+        if ($processor != null) {
+            $processors = UserProcessor::create([
+                'user_id' => $user_id,
+                'procId' => $request->procId
+            ]);
+
+            return response()->json([
+                'message' => 'processor assign to user successfully updated',
+                'processors' => $processors,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'processor not exists',
+                'processors' => null,
+            ], 404);
+        }
     }
 
     public function getProcessorsByToken(Request $request)

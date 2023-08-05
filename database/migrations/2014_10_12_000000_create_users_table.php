@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('family')->nullable();
             $table->string('mobile')->unique();
             $table->string('otp')->nullable();
+            $table->enum('type', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

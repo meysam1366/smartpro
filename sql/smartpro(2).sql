@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 30, 2023 at 07:25 PM
+-- Generation Time: Aug 05, 2023 at 07:33 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -43,7 +43,7 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `gadgets` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `gadgetId` bigint(20) UNSIGNED NOT NULL,
   `procId` bigint(20) UNSIGNED NOT NULL,
   `gadgetType` bigint(20) UNSIGNED NOT NULL,
   `gDavName` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -59,8 +59,8 @@ CREATE TABLE `gadgets` (
 -- Dumping data for table `gadgets`
 --
 
-INSERT INTO `gadgets` (`id`, `procId`, `gadgetType`, `gDavName`, `gCustomerName`, `lastValue`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(3, 12345, 1, 'meysam', 'meysam_Gadget', 1, 'active', NULL, '2023-07-30 13:28:35', '2023-07-30 13:37:06');
+INSERT INTO `gadgets` (`gadgetId`, `procId`, `gadgetType`, `gDavName`, `gCustomerName`, `lastValue`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(123, 12345, 1, 'meysam', 'meysam_Gadget', 1, 'active', NULL, '2023-08-05 15:40:45', '2023-08-05 16:01:12');
 
 -- --------------------------------------------------------
 
@@ -82,20 +82,21 @@ CREATE TABLE `gadget_change_value_histories` (
 --
 
 INSERT INTO `gadget_change_value_histories` (`id`, `gadget_id`, `value`, `timeOfChange`, `created_at`, `updated_at`) VALUES
-(2, 3, '2', '2023-07-30 16:59:52', '2023-07-30 13:29:52', '2023-07-30 13:29:52'),
-(3, 3, '2', '2023-07-30 17:00:25', '2023-07-30 13:30:25', '2023-07-30 13:30:25'),
-(4, 3, '2', '2023-07-30 17:00:47', '2023-07-30 13:30:47', '2023-07-30 13:30:47'),
-(5, 3, '2', '2023-07-30 17:01:00', '2023-07-30 13:31:00', '2023-07-30 13:31:00'),
-(6, 3, '2', '2023-07-30 17:01:10', '2023-07-30 13:31:10', '2023-07-30 13:31:10'),
-(7, 3, '2', '2023-07-30 17:01:45', '2023-07-30 13:31:45', '2023-07-30 13:31:45'),
-(8, 3, '2', '2023-07-30 17:02:04', '2023-07-30 13:32:04', '2023-07-30 13:32:04'),
-(9, 3, '2', '2023-07-30 17:02:10', '2023-07-30 13:32:10', '2023-07-30 13:32:10'),
-(10, 3, '2', '2023-07-30 17:02:42', '2023-07-30 13:32:42', '2023-07-30 13:32:42'),
-(11, 3, '2', '2023-07-30 17:02:53', '2023-07-30 13:32:53', '2023-07-30 13:32:53'),
-(12, 3, '2', '2023-07-30 17:03:00', '2023-07-30 13:33:00', '2023-07-30 13:33:00'),
-(13, 3, '2', '2023-07-30 19:21:46', '2023-07-30 15:51:46', '2023-07-30 15:51:46'),
-(14, 3, '2', '2023-07-30 19:22:05', '2023-07-30 15:52:05', '2023-07-30 15:52:05'),
-(15, 3, '2', '2023-07-30 19:24:04', '2023-07-30 15:54:04', '2023-07-30 15:54:04');
+(3, 123, '2', '2023-08-05 19:13:53', '2023-08-05 15:43:53', '2023-08-05 15:43:53'),
+(4, 123, '2', '2023-08-05 19:14:55', '2023-08-05 15:44:55', '2023-08-05 15:44:55'),
+(5, 123, '2', '2023-08-05 19:16:34', '2023-08-05 15:46:34', '2023-08-05 15:46:34'),
+(6, 123, '2', '2023-08-05 19:16:36', '2023-08-05 15:46:36', '2023-08-05 15:46:36'),
+(7, 123, '2', '2023-08-05 19:21:53', '2023-08-05 15:51:53', '2023-08-05 15:51:53'),
+(8, 123, '2', '2023-08-05 19:21:56', '2023-08-05 15:51:56', '2023-08-05 15:51:56'),
+(9, 123, '2', '2023-08-05 19:22:25', '2023-08-05 15:52:25', '2023-08-05 15:52:25'),
+(10, 123, '2', '2023-08-05 19:22:37', '2023-08-05 15:52:37', '2023-08-05 15:52:37'),
+(11, 123, '2', '2023-08-05 19:24:05', '2023-08-05 15:54:05', '2023-08-05 15:54:05'),
+(12, 123, '2', '2023-08-05 19:24:11', '2023-08-05 15:54:11', '2023-08-05 15:54:11'),
+(13, 123, '2', '2023-08-05 19:24:16', '2023-08-05 15:54:16', '2023-08-05 15:54:16'),
+(14, 123, '2', '2023-08-05 19:25:54', '2023-08-05 15:55:54', '2023-08-05 15:55:54'),
+(15, 123, '2', '2023-08-05 19:27:55', '2023-08-05 15:57:55', '2023-08-05 15:57:55'),
+(16, 123, '1', '2023-08-05 19:28:02', '2023-08-05 15:58:02', '2023-08-05 15:58:02'),
+(17, 123, '1', '2023-08-05 19:28:41', '2023-08-05 15:58:41', '2023-08-05 15:58:41');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,7 @@ CREATE TABLE `gadget_types` (
 --
 
 INSERT INTO `gadget_types` (`id`, `gTypeName`, `tag`, `created_at`, `updated_at`) VALUES
-(1, 'test', 'test', '2023-07-30 13:23:24', '2023-07-30 13:23:24');
+(1, 'test', 'test', '2023-08-05 15:37:56', '2023-08-05 15:37:56');
 
 -- --------------------------------------------------------
 
@@ -145,7 +146,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2023_05_21_113256_create_version', 1),
 (9, '2023_05_21_122621_add_interface_file_to_versions_table', 1),
 (10, '2023_07_30_134059_create_gadget_change_value_histories_table', 1),
-(11, '2023_07_30_134414_create_proc_frim_wares_table', 1);
+(11, '2023_07_30_134414_create_proc_frim_wares_table', 1),
+(12, '2023_08_01_153149_create_user_processors_table', 1);
 
 -- --------------------------------------------------------
 
@@ -165,6 +167,16 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, '09193804370', '291dfae10188c81d78d7bac1f900c037fd93d2377aac4da25c5dda9070f1b554', '[\"*\"]', NULL, NULL, '2023-08-05 12:03:48', '2023-08-05 12:03:48'),
+(2, 'App\\Models\\User', 1, '09193804370', 'e7391958a5edef1e2d9c0a68e7ccf05d20114c8692be7207d9362ae743522829', '[\"*\"]', '2023-08-05 15:37:56', NULL, '2023-08-05 15:35:01', '2023-08-05 15:37:56'),
+(3, 'App\\Models\\User', 1, '09193804370', '19e24369e81940279dd7a78ccf64f2b38a36c99bc4e2e4cefd924d50d5480618', '[\"*\"]', '2023-08-05 15:58:41', NULL, '2023-08-05 15:39:51', '2023-08-05 15:58:41'),
+(4, 'App\\Models\\User', 1, '09193804370', '4eb2017ca07881f955cb59609f3892456a54d82a9e2b73113f0251047b55159d', '[\"*\"]', '2023-08-05 16:02:44', NULL, '2023-08-05 15:59:56', '2023-08-05 16:02:44');
 
 -- --------------------------------------------------------
 
@@ -189,7 +201,7 @@ CREATE TABLE `processors` (
 --
 
 INSERT INTO `processors` (`procId`, `procType`, `procPassword`, `pDavName`, `pCustomerName`, `firstWorkDate`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(12345, 1, '123456', 'test', 'meysam', '2023-07-30 15:55:55', NULL, '2023-07-30 12:25:55', '2023-07-30 13:13:53');
+(12345, 1, '123456', 'test', 'meysam', '2023-08-05 19:04:35', NULL, '2023-08-05 15:34:35', '2023-08-05 15:36:23');
 
 -- --------------------------------------------------------
 
@@ -211,13 +223,7 @@ CREATE TABLE `proc_frim_wares` (
 --
 
 INSERT INTO `proc_frim_wares` (`id`, `pType`, `version`, `filePath`, `created_at`, `updated_at`) VALUES
-(1, 1, '1', '/Users/meysam/Downloads/projects/laravel/smartpro/public/frimWares/images1690735441-محرم.jpeg', '2023-07-30 13:14:01', '2023-07-30 13:14:01'),
-(2, 1, '1', 'http://localhost:8000/api/setNewVersion/frimWares/images1690735666-محرم.jpeg', '2023-07-30 13:17:46', '2023-07-30 13:17:46'),
-(3, 1, '1', 'http://localhost/frimWares/images1690735715-محرم.jpeg', '2023-07-30 13:18:35', '2023-07-30 13:18:35'),
-(4, 1, '1', 'http://localhost/frimWares/images1690735741-محرم.jpeg', '2023-07-30 13:19:01', '2023-07-30 13:19:01'),
-(5, 1, '1', 'http://localhost:8080/frimWares/images1690735758-محرم.jpeg', '2023-07-30 13:19:18', '2023-07-30 13:19:18'),
-(6, 1, '1', 'http://localhost:8000/frimWares/images1690735787-محرم.jpeg', '2023-07-30 13:19:47', '2023-07-30 13:19:47'),
-(7, 1, '1', 'http://localhost:8000/frimWares/images/1690735814-محرم.jpeg', '2023-07-30 13:20:14', '2023-07-30 13:20:14');
+(1, 1, '2', 'http://localhost:8000/frimWares/images/1691262451-antonio-janeski-CHVTt0aGbx0-unsplash.jpg', '2023-08-05 15:37:31', '2023-08-05 15:37:31');
 
 -- --------------------------------------------------------
 
@@ -238,7 +244,7 @@ CREATE TABLE `proc_types` (
 --
 
 INSERT INTO `proc_types` (`id`, `pTypeName`, `tag`, `created_at`, `updated_at`) VALUES
-(1, 'test', 'test', '2023-07-30 12:25:44', '2023-07-30 12:25:44');
+(1, 'test', 'test', '2023-08-05 15:34:13', '2023-08-05 15:34:13');
 
 -- --------------------------------------------------------
 
@@ -248,14 +254,43 @@ INSERT INTO `proc_types` (`id`, `pTypeName`, `tag`, `created_at`, `updated_at`) 
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `family` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `family` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `otp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `otp` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `family`, `mobile`, `otp`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, NULL, NULL, '09193804370', '12345', 'user', NULL, '2023-08-05 12:03:37', '2023-08-05 12:03:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_processors`
+--
+
+CREATE TABLE `users_processors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `procId` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users_processors`
+--
+
+INSERT INTO `users_processors` (`id`, `user_id`, `procId`, `created_at`, `updated_at`) VALUES
+(1, 1, 12345, '2023-08-05 16:02:07', '2023-08-05 16:02:07');
 
 -- --------------------------------------------------------
 
@@ -287,7 +322,7 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `gadgets`
 --
 ALTER TABLE `gadgets`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`gadgetId`),
   ADD KEY `gadgets_procid_foreign` (`procId`),
   ADD KEY `gadgets_gadgettype_foreign` (`gadgetType`);
 
@@ -346,6 +381,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_mobile_unique` (`mobile`);
 
 --
+-- Indexes for table `users_processors`
+--
+ALTER TABLE `users_processors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_processors_user_id_foreign` (`user_id`),
+  ADD KEY `users_processors_procid_foreign` (`procId`);
+
+--
 -- Indexes for table `versions`
 --
 ALTER TABLE `versions`
@@ -363,16 +406,10 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `gadgets`
---
-ALTER TABLE `gadgets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `gadget_change_value_histories`
 --
 ALTER TABLE `gadget_change_value_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `gadget_types`
@@ -384,19 +421,19 @@ ALTER TABLE `gadget_types`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `proc_frim_wares`
 --
 ALTER TABLE `proc_frim_wares`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `proc_types`
@@ -408,7 +445,13 @@ ALTER TABLE `proc_types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users_processors`
+--
+ALTER TABLE `users_processors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `versions`
@@ -431,7 +474,7 @@ ALTER TABLE `gadgets`
 -- Constraints for table `gadget_change_value_histories`
 --
 ALTER TABLE `gadget_change_value_histories`
-  ADD CONSTRAINT `gadget_change_value_histories_gadget_id_foreign` FOREIGN KEY (`gadget_id`) REFERENCES `gadgets` (`id`);
+  ADD CONSTRAINT `gadget_change_value_histories_gadget_id_foreign` FOREIGN KEY (`gadget_id`) REFERENCES `gadgets` (`gadgetId`);
 
 --
 -- Constraints for table `processors`
@@ -444,6 +487,13 @@ ALTER TABLE `processors`
 --
 ALTER TABLE `proc_frim_wares`
   ADD CONSTRAINT `proc_frim_wares_ptype_foreign` FOREIGN KEY (`pType`) REFERENCES `proc_types` (`id`);
+
+--
+-- Constraints for table `users_processors`
+--
+ALTER TABLE `users_processors`
+  ADD CONSTRAINT `users_processors_procid_foreign` FOREIGN KEY (`procId`) REFERENCES `processors` (`procId`),
+  ADD CONSTRAINT `users_processors_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

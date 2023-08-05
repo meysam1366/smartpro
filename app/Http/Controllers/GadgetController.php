@@ -160,6 +160,7 @@ class GadgetController extends Controller
     public function saveGadget(Request $request)
     {
         $this->validate($request, [
+            'gadgetId' => 'required',
             'procId' => 'required',
             'gadgetType' => 'required',
             'gDavName' => 'required',
@@ -167,6 +168,7 @@ class GadgetController extends Controller
         ]);
 
         Gadget::create([
+            'gadgetId' => $request->gadgetId,
             'procId' => $request->procId,
             'gadgetType' => $request->gadgetType,
             'gDavName' => $request->gDavName,
@@ -210,7 +212,7 @@ class GadgetController extends Controller
             $client->connect($connectionSettings, true);
 
             // Publish the message 'Hello world!' on the topic 'foo/bar/baz' using QoS 0.
-            $client->publish($procId, $lastValue, 0);
+            $client->publish("{$request->gadgetId}_{$procId}", $request->newValue, 0);
             $client->loop(true, true);
             // Gracefully terminate the connection to the broker.
             $client->disconnect();
@@ -222,6 +224,7 @@ class GadgetController extends Controller
 
         return response()->json([
             'message' => 'gadgetChangeValueHistory successfully created',
+            'topic' => "{$request->gadgetId}_{$procId}",
             'gadgetChangeValueHistory' => $gadgetChangeValueHistory
         ], 201);
     }
@@ -246,7 +249,7 @@ class GadgetController extends Controller
             'gCustomerName' => 'required',
         ]);
 
-        $gadget = Gadget::where('id', $request->gadgetId);
+        $gadget = Gadget::where('gadgetId', $request->gadgetId);
 
         $gadget->update([
             'gCustomerName' => $request->gCustomerName

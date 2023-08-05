@@ -53,8 +53,6 @@ Route::prefix('v1')
         Route::controller(ProcessorController::class)
             ->prefix('processor')
             ->group(function () {
-                Route::post('/setProcType', 'setProcType');
-                Route::post('/saveNewProc', 'saveNewProc');
                 Route::post('/registeredProc', 'registeredProc');
                 Route::post('/getGadgetLists', 'getGadgetLists');
                 Route::post('/changeName', 'changeName');
@@ -62,7 +60,7 @@ Route::prefix('v1')
                 Route::post('/getProcessorsByToken', 'getProcessorsByToken');
             });
         Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
-        Route::post('/checkVersion', [ProcFrimWareController::class, 'checkVersion']);
+
         Route::controller(GadgetController::class)
             ->prefix('gadget')
             ->group(function () {
@@ -73,6 +71,14 @@ Route::prefix('v1')
                 Route::post('/changeName', 'changeName');
             });
     });
+Route::prefix('v1')->group(function () {
+    Route::controller(ProcessorController::class)
+        ->prefix('processor')->group(function () {
+            Route::post('/setProcType', 'setProcType');
+            Route::post('/saveNewProc', 'saveNewProc');
+        });
+    Route::get('/checkVersion', [ProcFrimWareController::class, 'checkVersion']);
+});
 
 //Route::prefix('news')->name('news.')->group(function (){
    // Route::get('/details/{news}', 'NewsController@details')->name('details');

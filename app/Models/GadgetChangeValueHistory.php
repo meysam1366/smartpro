@@ -17,6 +17,6 @@ class GadgetChangeValueHistory extends Model
 
     public function gadget()
     {
-        return $this->belongsTo(Gadget::class);
+        return $this->belongsTo(Gadget::class, 'gadget_id');
     }
 }

@@ -14,7 +14,7 @@ class CreateGadgetsTable extends Migration
     public function up()
     {
         Schema::create('gadgets', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('gadgetId')->primary();
             $table->unsignedBigInteger('procId');
             $table->foreign('procId')->references('procId')->on('processors');
             $table->unsignedBigInteger('gadgetType');

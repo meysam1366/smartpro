@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('gadget_change_value_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gadget_id')->constrained();
+            $table->unsignedBigInteger('gadget_id');
+            $table->foreign('gadget_id')->references('gadgetId')->on('gadgets');
             $table->string('value');
             $table->datetime('timeOfChange');
             $table->timestamps();

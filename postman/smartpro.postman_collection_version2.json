@@ -105,6 +105,16 @@
 		{
 			"name": "http://localhost:8000/api/v1/processor/registeredProc",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -148,6 +158,16 @@
 		{
 			"name": "http://localhost:8000/api/v1/processor/getGadgetLists",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -186,6 +206,16 @@
 		{
 			"name": "http://localhost:8000/api/v1/processor/changeName",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -234,7 +264,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
 							"type": "string"
 						}
 					]
@@ -257,13 +287,13 @@
 						},
 						{
 							"key": "version",
-							"value": "1",
+							"value": "2",
 							"type": "text"
 						},
 						{
 							"key": "filePath",
 							"type": "file",
-							"src": "/Users/meysam/Downloads/شب-قدر1-1-scaled.jpg"
+							"src": "/Users/meysam/Downloads/antonio-janeski-CHVTt0aGbx0-unsplash.jpg"
 						}
 					]
 				},
@@ -291,7 +321,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
 							"type": "string"
 						}
 					]
@@ -344,7 +374,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "3|NX9P1Mid6Jr0fhhPU9TpUQjCjPT08vRkZK61nzHJ",
 							"type": "string"
 						}
 					]
@@ -379,6 +409,11 @@
 							"key": "lastValue",
 							"value": "1",
 							"type": "text"
+						},
+						{
+							"key": "gadgetId",
+							"value": "123",
+							"type": "text"
 						}
 					]
 				},
@@ -407,7 +442,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "3|NX9P1Mid6Jr0fhhPU9TpUQjCjPT08vRkZK61nzHJ",
 							"type": "string"
 						}
 					]
@@ -425,12 +460,12 @@
 					"formdata": [
 						{
 							"key": "gadgetId",
-							"value": "1",
+							"value": "123",
 							"type": "text"
 						},
 						{
 							"key": "newValue",
-							"value": "2",
+							"value": "1",
 							"type": "text"
 						}
 					]
@@ -460,7 +495,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "4|qmkMo6WPPN7pdkcJa7IDSqm6ZFHy6o9Sd5BhrFYh",
 							"type": "string"
 						}
 					]
@@ -478,7 +513,7 @@
 					"formdata": [
 						{
 							"key": "gadgetId",
-							"value": "1",
+							"value": "123",
 							"type": "text"
 						}
 					]
@@ -508,7 +543,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "4|qmkMo6WPPN7pdkcJa7IDSqm6ZFHy6o9Sd5BhrFYh",
 							"type": "string"
 						}
 					]
@@ -526,7 +561,7 @@
 					"formdata": [
 						{
 							"key": "gadgetId",
-							"value": "1",
+							"value": "123",
 							"type": "text"
 						},
 						{
@@ -642,7 +677,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "4|qmkMo6WPPN7pdkcJa7IDSqm6ZFHy6o9Sd5BhrFYh",
 							"type": "string"
 						}
 					]
@@ -661,6 +696,11 @@
 						{
 							"key": "procId",
 							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "procPassword",
+							"value": "123456",
 							"type": "text"
 						}
 					]
@@ -690,7 +730,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
+							"value": "4|qmkMo6WPPN7pdkcJa7IDSqm6ZFHy6o9Sd5BhrFYh",
 							"type": "string"
 						}
 					]
@@ -726,6 +766,9 @@
 		},
 		{
 			"name": "http://localhost:8000/api/v1/checkVersion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -737,7 +780,7 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Accept",
@@ -761,7 +804,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/checkVersion",
+					"raw": "http://localhost:8000/api/v1/checkVersion?pType=1&version=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -771,6 +814,16 @@
 						"api",
 						"v1",
 						"checkVersion"
+					],
+					"query": [
+						{
+							"key": "pType",
+							"value": "1"
+						},
+						{
+							"key": "version",
+							"value": "1"
+						}
 					]
 				}
 			},
