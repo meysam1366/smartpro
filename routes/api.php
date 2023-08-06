@@ -59,14 +59,12 @@ Route::prefix('v1')
                 Route::post('/setProcessorsToUser', 'setProcessorsToUser');
                 Route::post('/getProcessorsByToken', 'getProcessorsByToken');
             });
-        Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
+
 
         Route::controller(GadgetController::class)
             ->prefix('gadget')
             ->group(function () {
-                Route::post('/setGadgetType', 'setGadgetType');
-                Route::post('/saveGadget', 'saveGadget');
-                Route::post('/setNewValue', 'setNewValue');
+
                 Route::post('/getGadgetValue', 'getGadgetValue');
                 Route::post('/changeName', 'changeName');
             });
@@ -77,6 +75,10 @@ Route::prefix('v1')->group(function () {
             Route::post('/setProcType', 'setProcType');
             Route::post('/saveNewProc', 'saveNewProc');
         });
+    Route::post('/setGadgetType', [GadgetController::class, 'setGadgetType']);
+    Route::post('/saveGadget', [GadgetController::class, 'saveGadget']);
+    Route::post('/setNewValue', [GadgetController::class, 'setNewValue']);
+    Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
     Route::get('/checkVersion', [ProcFrimWareController::class, 'checkVersion']);
 });
 

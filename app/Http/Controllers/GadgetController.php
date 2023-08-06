@@ -212,7 +212,7 @@ class GadgetController extends Controller
             $client->connect($connectionSettings, true);
 
             // Publish the message 'Hello world!' on the topic 'foo/bar/baz' using QoS 0.
-            $client->publish("{$request->gadgetId}_{$procId}", $request->newValue, 0);
+            $client->publish($procId, "{$request->gadgetId}_{$request->newValue}", 0);
             $client->loop(true, true);
             // Gracefully terminate the connection to the broker.
             $client->disconnect();

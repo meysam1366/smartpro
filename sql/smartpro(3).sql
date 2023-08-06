@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 05, 2023 at 07:33 PM
+-- Generation Time: Aug 06, 2023 at 07:51 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -223,7 +223,7 @@ CREATE TABLE `proc_frim_wares` (
 --
 
 INSERT INTO `proc_frim_wares` (`id`, `pType`, `version`, `filePath`, `created_at`, `updated_at`) VALUES
-(1, 1, '2', 'http://localhost:8000/frimWares/images/1691262451-antonio-janeski-CHVTt0aGbx0-unsplash.jpg', '2023-08-05 15:37:31', '2023-08-05 15:37:31');
+(1, 1, '2', 'http://localhost:8000/storage/frimWares/images/1691351449-henri-l-CHt4BMi0-Is-unsplash.jpg', '2023-08-06 16:08:00', '2023-08-06 16:20:49');
 
 -- --------------------------------------------------------
 

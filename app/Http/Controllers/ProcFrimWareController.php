@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProcFrimWare;
+use Illuminate\Support\Facades\Storage;
 
 class ProcFrimWareController extends Controller
 {
@@ -21,17 +22,33 @@ class ProcFrimWareController extends Controller
 
         $fileName = time() . '-' . $file->getClientOriginalName();
 
-        $file->move($dir, $fileName);
+        // $file->move($dir, $fileName);
+        $file->storeAs('public/frimWares/images', $fileName);
 
-        ProcFrimWare::create([
-            'pType' => $request->pType,
-            'version' => $request->version,
-            'filePath' => env('APP_URL') . '/frimWares/images/' . $fileName
-        ]);
+        // Storage::url($dir . $fileName);
 
-        return response()->json([
-            'message' => 'FrimWare successfully created',
-        ], 201);
+        $procFrimWare = ProcFrimWare::where('pType', $request->pType)->first();
+
+        if ($procFrimWare == null) {
+            ProcFrimWare::create([
+                'pType' => $request->pType,
+                'version' => $request->version,
+                'filePath' => env('APP_URL') . '/storage/frimWares/images/' . $fileName
+            ]);
+
+            return response()->json([
+                'message' => 'FrimWare successfully created',
+            ], 201);
+        } else {
+            $procFrimWare->update([
+                'version' => $request->version,
+                'filePath' => env('APP_URL') . '/storage/frimWares/images/' . $fileName
+            ]);
+
+            return response()->json([
+                'message' => 'FrimWare successfully updated',
+            ], 200);
+        }
     }
 
     public function checkVersion(Request $request)

@@ -260,14 +260,7 @@
 			"name": "http://localhost:8000/api/v1/setNewVersion",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [
@@ -293,7 +286,7 @@
 						{
 							"key": "filePath",
 							"type": "file",
-							"src": "/Users/meysam/Downloads/antonio-janeski-CHVTt0aGbx0-unsplash.jpg"
+							"src": "/Users/meysam/Downloads/henri-l-CHt4BMi0-Is-unsplash.jpg"
 						}
 					]
 				},
