@@ -62,7 +62,7 @@ Route::prefix('v1')
 
 
         Route::controller(GadgetController::class)
-            ->prefix('gadget')
+
             ->group(function () {
 
                 Route::post('/getGadgetValue', 'getGadgetValue');
@@ -75,10 +75,12 @@ Route::prefix('v1')->group(function () {
             Route::post('/setProcType', 'setProcType');
             Route::post('/saveNewProc', 'saveNewProc');
         });
-    Route::post('/setGadgetType', [GadgetController::class, 'setGadgetType']);
-    Route::post('/saveGadget', [GadgetController::class, 'saveGadget']);
-    Route::post('/setNewValue', [GadgetController::class, 'setNewValue']);
-    Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
+    Route::prefix('gadget')->group(function () {
+        Route::post('/setGadgetType', [GadgetController::class, 'setGadgetType']);
+        Route::post('/saveGadget', [GadgetController::class, 'saveGadget']);
+        Route::post('/setNewValue', [GadgetController::class, 'setNewValue']);
+        Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
+    });
     Route::get('/checkVersion', [ProcFrimWareController::class, 'checkVersion']);
 });
 

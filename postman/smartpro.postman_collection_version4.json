@@ -310,14 +310,7 @@
 			"name": "http://localhost:8000/api/v1/gadget/setGadgetType",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "2|Gurm8vKXfjXuRs999KjPtaCFC8ZZnHhqRmOfvKxi",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [
@@ -363,14 +356,7 @@
 			"name": "http://localhost:8000/api/v1/gadget/saveGadget",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "3|NX9P1Mid6Jr0fhhPU9TpUQjCjPT08vRkZK61nzHJ",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [
@@ -405,7 +391,7 @@
 						},
 						{
 							"key": "gadgetId",
-							"value": "123",
+							"value": "1234",
 							"type": "text"
 						}
 					]
@@ -431,14 +417,7 @@
 			"name": "http://localhost:8000/api/v1/gadget/setNewValue",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "3|NX9P1Mid6Jr0fhhPU9TpUQjCjPT08vRkZK61nzHJ",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [
@@ -764,14 +743,7 @@
 			},
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "3|ZQfMHt4oseeKwJKz3s2XG6HWvaet4pDbwlg2fLPr",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 06, 2023 at 07:51 PM
+-- Generation Time: Aug 07, 2023 at 01:46 AM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -60,7 +60,8 @@ CREATE TABLE `gadgets` (
 --
 
 INSERT INTO `gadgets` (`gadgetId`, `procId`, `gadgetType`, `gDavName`, `gCustomerName`, `lastValue`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(123, 12345, 1, 'meysam', 'meysam_Gadget', 1, 'active', NULL, '2023-08-05 15:40:45', '2023-08-05 16:01:12');
+(123, 12345, 1, 'meysam', 'meysam_Gadget', 1, 'active', NULL, '2023-08-05 15:40:45', '2023-08-05 16:01:12'),
+(1234, 12345, 1, 'meysam', NULL, 1, 'active', NULL, '2023-08-06 22:14:39', '2023-08-06 22:14:39');
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,8 @@ INSERT INTO `gadget_change_value_histories` (`id`, `gadget_id`, `value`, `timeOf
 (14, 123, '2', '2023-08-05 19:25:54', '2023-08-05 15:55:54', '2023-08-05 15:55:54'),
 (15, 123, '2', '2023-08-05 19:27:55', '2023-08-05 15:57:55', '2023-08-05 15:57:55'),
 (16, 123, '1', '2023-08-05 19:28:02', '2023-08-05 15:58:02', '2023-08-05 15:58:02'),
-(17, 123, '1', '2023-08-05 19:28:41', '2023-08-05 15:58:41', '2023-08-05 15:58:41');
+(17, 123, '1', '2023-08-05 19:28:41', '2023-08-05 15:58:41', '2023-08-05 15:58:41'),
+(18, 123, '1', '2023-08-07 01:44:51', '2023-08-06 22:14:51', '2023-08-06 22:14:51');
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,8 @@ CREATE TABLE `gadget_types` (
 --
 
 INSERT INTO `gadget_types` (`id`, `gTypeName`, `tag`, `created_at`, `updated_at`) VALUES
-(1, 'test', 'test', '2023-08-05 15:37:56', '2023-08-05 15:37:56');
+(1, 'test', 'test', '2023-08-05 15:37:56', '2023-08-05 15:37:56'),
+(2, 'test', 'test', '2023-08-06 22:14:07', '2023-08-06 22:14:07');
 
 -- --------------------------------------------------------
 
@@ -409,13 +412,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gadget_change_value_histories`
 --
 ALTER TABLE `gadget_change_value_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `gadget_types`
 --
 ALTER TABLE `gadget_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
