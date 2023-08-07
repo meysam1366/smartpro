@@ -76,9 +76,9 @@ Route::prefix('v1')->group(function () {
     Route::prefix('gadget')
         ->controller(GadgetController::class)
         ->group(function () {
-            Route::post('/setGadgetType', [GadgetController::class, 'setGadgetType']);
-            Route::post('/saveGadget', [GadgetController::class, 'saveGadget']);
-            Route::post('/setNewValue', [GadgetController::class, 'setNewValue']);
+            Route::post('/setGadgetType', 'setGadgetType');
+            Route::post('/saveGadget', 'saveGadget');
+            Route::post('/setNewValue', 'setNewValue');
         });
     Route::post('/setNewVersion', [ProcFrimWareController::class, 'setNewVersion']);
     Route::get('/checkVersion', [ProcFrimWareController::class, 'checkVersion']);

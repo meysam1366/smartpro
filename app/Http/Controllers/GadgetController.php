@@ -224,7 +224,7 @@ class GadgetController extends Controller
 
         return response()->json([
             'message' => 'gadgetChangeValueHistory successfully created',
-            'topic' => "{$request->gadgetId}_{$procId}",
+            'topic' => $procId,
             'gadgetChangeValueHistory' => $gadgetChangeValueHistory
         ], 201);
     }
